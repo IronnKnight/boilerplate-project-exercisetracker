@@ -1,4 +1,4 @@
-const { Database } = require("sqlite-async");
+import { Database } from "sqlite-async";
 
 let db;
 
@@ -36,7 +36,4 @@ function getDatabase() {
   return db;
 }
 
-module.exports = {
-  initDatabase,
-  getDatabase,
-};
+export { initDatabase, getDatabase };

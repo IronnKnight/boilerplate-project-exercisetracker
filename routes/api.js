@@ -1,4 +1,4 @@
-const { getDatabase } = require("../database/db");
+import { getDatabase } from "../database/db.js";
 
 async function createUser(req, res) {
   try {
@@ -157,9 +157,4 @@ async function getUserLogs(req, res) {
   }
 }
 
-module.exports = {
-  createUser,
-  getAllUsers,
-  addExercise,
-  getUserLogs,
-};
+export { createUser, getAllUsers, addExercise, getUserLogs };

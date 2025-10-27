@@ -1,9 +1,16 @@
-const express = require('express')
+import express from 'express'
+import cors from 'cors'
+import dotenv from 'dotenv'
+import path from 'path'
+import { fileURLToPath } from 'url'
+import { initDatabase } from './database/db.js'
+import { createUser, getAllUsers, addExercise, getUserLogs } from './routes/api.js'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
 const app = express()
-const cors = require('cors')
-const { initDatabase } = require('./database/db')
-const { createUser, getAllUsers, addExercise, getUserLogs } = require('./routes/api')
-require('dotenv').config()
+dotenv.config()
 
 app.use(cors())
 app.use(express.static('public'))
