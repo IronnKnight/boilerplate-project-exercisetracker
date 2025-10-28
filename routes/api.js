@@ -75,6 +75,17 @@ async function addExercise(req, res) {
         .json({ error: "Date must be in YYYY-MM-DD format" });
     }
 
+    const dateObj = new Date(exerciseDate);
+    const [year, month, day] = exerciseDate.split("-").map(Number);
+    console.log(dateObj.getFullYear(), year, dateObj.getMonth(), month - 1, dateObj.getDate(), day);
+    if (
+      dateObj.getFullYear() !== year ||
+      dateObj.getMonth() !== month - 1 ||
+      dateObj.getDate() !== day
+    ) {
+      return res.status(400).json({ error: "Invalid date" });
+    }
+
     const result = await db.run(
       "INSERT INTO exercises (user_id, description, duration, date) VALUES (?, ?, ?, ?)",
       [_id, description.trim(), parseInt(duration), exerciseDate]
@@ -120,7 +131,7 @@ async function getUserLogs(req, res) {
       params.push(to);
     }
 
-    query += " ORDER BY date DESC";
+    query += " ORDER BY date ASC";
 
     if (limit && !isNaN(limit) && limit > 0) {
       query += " LIMIT ?";
